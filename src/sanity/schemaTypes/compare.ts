@@ -1,0 +1,148 @@
+import { defineField, defineType } from 'sanity';
+
+export default defineType({
+  name: 'carSpecifications',
+  title: 'Car Specifications',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'name',
+      title: 'Car Name',
+      type: 'string',
+      description: 'The name of the car (e.g., Tesla Model S, Mustang GT)',
+      validation: (Rule) => Rule.required().min(1).max(100),
+    }),
+    defineField({
+      name: 'engine',
+      title: 'Engine',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'type',
+          title: 'Engine Type',
+          type: 'string',
+          description: 'The type of engine (e.g., V6, Electric, Hybrid)',
+          validation: (Rule) => Rule.required().min(3).max(50),
+        }),
+        defineField({
+          name: 'displacement',
+          title: 'Engine Displacement',
+          type: 'number',
+          description: 'The engine displacement in liters (e.g., 2.0L)',
+          validation: (Rule) => Rule.required().min(0).max(10),
+        }),
+        defineField({
+          name: 'horsepower',
+          title: 'Horsepower',
+          type: 'number',
+          description: 'The engine horsepower (e.g., 300 HP)',
+          validation: (Rule) => Rule.required().min(0),
+        }),
+        defineField({
+          name: 'torque',
+          title: 'Torque',
+          type: 'number',
+          description: 'The engine torque in Nm (Newton-meters)',
+          validation: (Rule) => Rule.required().min(0),
+        }),
+        defineField({
+          name: 'fuelType',
+          title: 'Fuel Type',
+          type: 'string',
+          description: 'The fuel type of the car (e.g., Petrol, Diesel, Electric)',
+          validation: (Rule) => Rule.required().min(3).max(50),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'transmission',
+      title: 'Transmission',
+      type: 'string',
+      description: 'The transmission type (e.g., Automatic, Manual)',
+      validation: (Rule) => Rule.required().min(3).max(50),
+    }),
+    defineField({
+      name: 'drivetrain',
+      title: 'Drivetrain',
+      type: 'string',
+      description: 'The drivetrain configuration (e.g., AWD, FWD, RWD)',
+      validation: (Rule) => Rule.required().min(3).max(50),
+    }),
+    defineField({
+      name: 'dimensions',
+      title: 'Dimensions',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'length',
+          title: 'Length',
+          type: 'number',
+          description: 'The car length in meters',
+          validation: (Rule) => Rule.required().min(0).max(10),
+        }),
+        defineField({
+          name: 'width',
+          title: 'Width',
+          type: 'number',
+          description: 'The car width in meters',
+          validation: (Rule) => Rule.required().min(0).max(10),
+        }),
+        defineField({
+          name: 'height',
+          title: 'Height',
+          type: 'number',
+          description: 'The car height in meters',
+          validation: (Rule) => Rule.required().min(0).max(5),
+        }),
+        defineField({
+          name: 'wheelbase',
+          title: 'Wheelbase',
+          type: 'number',
+          description: 'The wheelbase of the car in meters',
+          validation: (Rule) => Rule.required().min(0).max(5),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'performance',
+      title: 'Performance',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'ZeroToSixty',
+          title: '0-60 mph Time',
+          type: 'number',
+          description: 'The time in seconds to accelerate from 0 to 60 mph',
+          validation: (Rule) => Rule.required().min(0).max(10),
+        }),
+        defineField({
+          name: 'topSpeed',
+          title: 'Top Speed',
+          type: 'number',
+          description: 'The top speed of the car in mph or km/h',
+          validation: (Rule) => Rule.required().min(0),
+        }),
+        defineField({
+          name: 'weight',
+          title: 'Weight',
+          type: 'number',
+          description: 'The weight of the car in kilograms',
+          validation: (Rule) => Rule.required().min(0),
+        }),
+      ],
+    }),
+    defineField({
+      name: 'price',
+      title: 'Price',
+      type: 'number',
+      description: 'The price of the car in USD',
+      validation: (Rule) => Rule.required().min(0),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Car Image',
+      type: 'image',
+      description: 'Image of the car',
+    }),
+  ],
+});
