@@ -1,3 +1,4 @@
+// app/posts/[slug]/page.tsx
 import Image from 'next/image';
 import { getAllPosts, getPostBySlug } from '@/sanity/lib/sanity';
 import type { Post } from '@/types/post';
@@ -12,7 +13,9 @@ export default async function PostPage({
 }: {
   params: { slug: string };
 }) {
-  const post = await getPostBySlug(params.slug);
+  // Explicitly type cast the slug parameter
+  const slug = params.slug as string;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     return (
@@ -32,7 +35,6 @@ export default async function PostPage({
       </div>
 
       <div className="max-w-3xl mx-auto">
-        {/* Post Header */}
         <div className="mb-8 text-center">
           <div className="inline-block">
             <h1 className="text-4xl font-bold text-white mb-2">{post.title}</h1>
@@ -62,7 +64,6 @@ export default async function PostPage({
           </div>
         </div>
 
-        {/* Main Image */}
         {post.mainImageUrl && (
           <div className="relative h-96 mb-8 rounded-lg overflow-hidden shadow-lg">
             <Image
@@ -76,7 +77,6 @@ export default async function PostPage({
           </div>
         )}
 
-        {/* Post Content */}
         <article className="prose lg:prose-xl max-w-none bg-gray-800 p-6 rounded-lg shadow-md text-gray-300">
           {post.body?.length ? (
             <PortableTextComponent value={post.body} />
@@ -85,7 +85,6 @@ export default async function PostPage({
           )}
         </article>
 
-        {/* Comment Section */}
         <div className="mt-12 bg-gray-800 p-6 rounded-lg shadow-md">
           <CommentDisplay slug={post.slug.current} />
           <CommentComponent postName={post.title} />
