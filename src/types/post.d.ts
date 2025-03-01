@@ -1,3 +1,4 @@
+// types/post.d.ts
 import type { PortableTextBlock } from '@portabletext/types';
 
 export interface Post {
@@ -10,6 +11,6 @@ export interface Post {
   mainImageUrl: string;
   publishedAt: string;
   body: PortableTextBlock[];
-  authorName: string; // New field
-  authorImage: string; // New field
+  authorName: string;
+  authorImage: string;
 }
