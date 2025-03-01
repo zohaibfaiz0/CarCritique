@@ -1,4 +1,3 @@
-// app/posts/[slug]/page.tsx
 import Image from 'next/image';
 import { getAllPosts, getPostBySlug } from '@/sanity/lib/sanity';
 import type { Post } from '@/types/post';
@@ -8,13 +7,11 @@ import CommentDisplay from '@/app/components/commentdisplay';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
@@ -28,11 +25,8 @@ export default async function PostPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-gray-900 py-12 px-4">
       <div className="flex items-center text-white/65 hover:text-white transition-all duration-300">
-        <ArrowLeft className='ml-3'/>
-        <Link 
-          href="/posts" 
-          className="px-6 py-3 rounded-xl font-medium"
-        >
+        <ArrowLeft className="ml-3" />
+        <Link href="/posts" className="px-6 py-3 rounded-xl font-medium">
           Back to Reviews
         </Link>
       </div>
