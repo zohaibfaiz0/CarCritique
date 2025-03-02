@@ -7,8 +7,8 @@ interface CarDetailsProps {
 }
 
 export const CarDetails = ({ car, formatPrice }: CarDetailsProps) => (
-  <div>
-    <h3 className="text-2xl font-bold text-white mb-6 text-center">{car.name}</h3>
+  <div className="max-w-lg mx-auto p-4">
+    <h3 className="text-lg sm:text-2xl font-bold text-white mb-6 text-center">{car.name}</h3>
     <div className="space-y-4">
       <DetailItem label="Engine Type" value={car.engine.type} />
       <DetailItem label="Engine Displacement" value={`${car.engine.displacement}L`} />
@@ -30,7 +30,7 @@ export const CarDetails = ({ car, formatPrice }: CarDetailsProps) => (
 );
 
 const DetailItem = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex items-center justify-between">
+  <div className="grid grid-cols-2 gap-2 sm:flex sm:justify-between">
     <p className="text-gray-400">{label}</p>
     <p className="text-white">{value}</p>
   </div>

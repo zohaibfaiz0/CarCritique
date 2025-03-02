@@ -4,60 +4,57 @@ import React from 'react';
 
 const HeroSection = () => {
   return (
-    <section className="relative h-screen overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-black">
-        {/* Decorative speed lines */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-1 mt-2 bg-red-600 opacity-20 transform -rotate-45"
-              style={{
-                left: `${i * 25}%`,
-                width: '200%',
-                top: `${i * 20}%`,
-                animation: `slideRight 3s linear infinite`,
-                animationDelay: `${i * 0.2}s`,
-              }}
-            />
-          ))}
-        </div>
+    <section className="relative h-screen flex items-center justify-center bg-gradient-to-b from-gray-900 to-black px-6 sm:px-8">
+      {/* Animated Speed Lines */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-0.5 bg-red-600 opacity-20 transform -rotate-45"
+            style={{
+              left: `${i * 22}%`,
+              width: '170%',
+              top: `${i * 20}%`,
+              animation: `slideRight 4s linear infinite`,
+              animationDelay: `${i * 0.3}s`,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Hero content */}
-      <div className="relative h-full flex items-center justify-center px-6">
-        <div className="text-center space-y-8 max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-bold">
-            <span className="text-white">SPEED.</span>
-            <span className="text-red-600">STYLE.</span>
-            <span className="text-white">SPIRIT.</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300">
-            Expert Reviews. Unbiased Opinions. Pure Automotive Passion.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/posts">
-              <button className="px-8 py-4 bg-red-600 text-white rounded hover:bg-red-700 transition-all duration-300 transform hover:-translate-y-1">
-                Latest Reviews
-              </button>
-            </Link>
-            <button className="px-8 py-4 bg-transparent text-white border-2 border-white rounded hover:bg-white hover:text-black transition-all duration-300 transform hover:-translate-y-1">
-              Compare Cars
+      {/* Hero Content */}
+      <div className="relative text-center space-y-5 max-w-2xl sm:max-w-4xl">
+        <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold leading-snug">
+          <span className="text-white">SPEED.</span>{' '}
+          <span className="text-red-600">STYLE.</span>{' '}
+          <span className="text-white">SPIRIT.</span>
+        </h1>
+        <p className="text-lg sm:text-xl text-gray-300 px-4 sm:px-0">
+          Expert Reviews. Unbiased Opinions. Pure Automotive Passion.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+          <Link href="/posts">
+            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base">
+              Latest Reviews
             </button>
-          </div>
+          </Link>
+          <Link href="/compare">
+          <button className="px-6 sm:px-8 py-3 sm:py-4 bg-transparent text-white border-2 border-white rounded-lg hover:bg-white hover:text-black transition transform hover:-translate-y-1 w-full sm:w-auto text-sm sm:text-base">
+            Compare Cars
+          </button>
+          </Link>
         </div>
       </div>
 
-      {/* Animated scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
-        <span className="text-gray-400 text-sm mb-2">Scroll to Explore</span>
-        <div className="w-6 h-10 border-2 border-red-600 rounded-full relative">
-          <div className="w-1 h-3 bg-red-600 rounded-full mx-auto mt-2 animate-scroll" />
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-6 sm:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+        <span className="text-gray-400 text-xs sm:text-sm mb-1">Scroll to Explore</span>
+        <div className="w-4 sm:w-5 h-7 sm:h-9 border-2 border-red-600 rounded-full relative flex justify-center items-start">
+          <div className="w-1 h-3 bg-red-600 rounded-full mt-2 animate-scroll" />
         </div>
       </div>
 
-      {/* CSS for animations */}
+      {/* CSS Animations */}
       <style jsx>{`
         @keyframes slideRight {
           0% {

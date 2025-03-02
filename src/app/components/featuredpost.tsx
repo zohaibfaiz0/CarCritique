@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,28 +10,34 @@ const FeaturedStories = () => {
 
   useEffect(() => {
     sanityClient
-    .fetch(`*[_type == "post"] | order(publishedAt desc)[0...3] { // Fetch only the top 3 posts
-      _id,
-      title,
-      slug,
-      excerpt,
-      mainImageUrl,
-      publishedAt,
-      authorName,
-      authorImage
-    }`)
+      .fetch(`*[_type == "post"] | order(publishedAt desc)[0...3] { // Fetch only the top 3 posts
+        _id,
+        title,
+        slug,
+        excerpt,
+        mainImageUrl,
+        publishedAt,
+        authorName,
+        authorImage
+      }`)
       .then(setPosts);
   }, []);
 
   return (
     <section className="py-16 bg-gray-900">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl font-bold text-white">
-            Featured Reviews
-            <div className="h-1 w-42 bg-red-600 mt-2" />
-          </h2>
-          <Link href="/posts" className="text-red-600 hover:text-red-500 flex items-center">
+        {/* Heading and "View All" Link */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
+          <div className="text-center sm:text-left mb-4 sm:mb-0">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Featured Reviews
+            </h2>
+            <div className="h-1 w-32 md:w-48 bg-red-600 mt-2 mx-auto sm:mx-0" />
+          </div>
+          <Link
+            href="/posts"
+            className="text-red-600 hover:text-red-500 flex items-center text-lg"
+          >
             View All
             <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -39,10 +45,11 @@ const FeaturedStories = () => {
           </Link>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid Layout for Posts */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <div key={post._id} className="bg-gray-800 rounded-lg overflow-hidden group hover:transform hover:scale-105 transition-all duration-300">
-              <div className="relative h-56">
+              <div className="relative h-56 md:h-64 lg:h-72">
                 {post.mainImageUrl ? (
                   <Image
                     src={post.mainImageUrl}
@@ -58,7 +65,7 @@ const FeaturedStories = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
               </div>
               
-              <div className="p-6">
+              <div className="p-4 md:p-6">
                 <div className="flex items-center space-x-3 mb-4">
                   {post.authorImage && (
                     <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-red-600">
@@ -73,7 +80,7 @@ const FeaturedStories = () => {
                   <span className="text-gray-400">{post.authorName}</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-600 transition-colors">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-red-600 transition-colors">
                   {post.title}
                 </h3>
                 <p className="text-gray-400 line-clamp-2 mb-4">{post.excerpt}</p>

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ const LatestUpdates = () => {
 
   useEffect(() => {
     sanityClient
-       .fetch(`*[_type == "post"] | order(publishedAt asc)[0...3] {
+      .fetch(`*[_type == "post"] | order(publishedAt asc)[0...3] {
           _id,
           title,
           desc,
@@ -38,13 +38,16 @@ const LatestUpdates = () => {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
+    <section className="py-16 bg-gradient-to-b from-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-bold text-white">
-            Latest Reviews
-            <div className="h-1 w-42 bg-red-600 mt-2" />
-          </h2>
+        {/* Heading and Tabs */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-12">
+          <div className="text-center sm:text-left mb-6 sm:mb-0">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Latest Reviews
+            </h2>
+            <div className="h-1 w-32 md:w-48 bg-red-600 mt-2 mx-auto sm:mx-0" />
+          </div>
           <div className="flex space-x-4">
             <button
               onClick={() => setActiveTab('latest')}
@@ -64,10 +67,12 @@ const LatestUpdates = () => {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        {/* Grid Layout for Posts */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.slice(0, 6).map((post) => (
             <div key={post._id} className="bg-gray-800 rounded-lg overflow-hidden group hover:transform hover:scale-105 transition-all duration-300">
-              <div className="relative h-56">
+              <div className="relative h-56 md:h-64 lg:h-72">
                 {post.mainImageUrl ? (
                   <Image
                     src={post.mainImageUrl}
@@ -83,8 +88,8 @@ const LatestUpdates = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-red-600 transition-colors">
+              <div className="p-4 md:p-6">
+                <h3 className="text-lg md:text-xl font-bold text-white mb-2 group-hover:text-red-600 transition-colors">
                   {post.title}
                 </h3>
                 <p className="text-gray-400 line-clamp-2 mb-4">{post.desc}</p>
@@ -111,6 +116,8 @@ const LatestUpdates = () => {
             </div>
           ))}
         </div>
+
+        {/* "See All Reviews" Button */}
         <div className="mt-12 text-center">
           <Link href="/posts">
             <button className="px-8 py-3 bg-red-600 text-white rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
